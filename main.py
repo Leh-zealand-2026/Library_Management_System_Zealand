@@ -54,3 +54,45 @@ class Library:
     def add_member(self, member):
         self.members[member.member_id] = member # adding member object
 
+    # Our logic for issuing books
+    def issue_book(self, member_id, book_id):
+
+        # Checking for book_id match in the books list and handling exception
+        if book_id not in self.books:
+            print("No book matches that ID in the database")
+            return
+        
+        # Checking member_id in members list
+        if member_id not in self.members:
+            print("Member does not exist.")
+            return
+        
+        # if book and member exist we then check if copies are available
+        if book.copies > 0:
+            book.copies -= 1
+            member.borrow_book(book_id)
+            print(f"Book issued successfully to {member_id}")
+        else:
+            print("No copies are currently available, please try again later")
+
+    # Our logic for returning books is similar issueing
+    def return_book(self, member_id, book_id):
+
+        # First check if book and member exist in database
+        if book_id not in self.books:
+            print("Book ID match not found in database")
+            return
+        if member_id not in self.members:
+            print("Member ID not found in database")
+            return
+        
+        book = self.books[book_id]
+        member = self.members[member_id]
+
+        # Now we check the members list of borrowed books and update their list.
+        if book_id in member.borrowed.books:
+            book.copies += 1
+            member.return_book(book_id)
+            print(f"{book_id} was returned successfully.")
+        else:
+            print(f"Book was not found in {member_id}'s borrowed list")
