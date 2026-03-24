@@ -42,9 +42,15 @@ class Member:
         print(f"Name: {self.name}")
         print(f"Borrowed Books: {self.borrowed_books}")
 
-
+# The library keeps track of books and members, these are saved as objects in lists.
 class Library:
-    def __init__(self, books, members):
-        self.books = books
-        self.members = members
-        
+    def __init__(self):
+        self.books = {} # List of books
+        self.members = {} # List of members
+    
+    def add_book(self, book):
+        self.books[book.book_id] = book # We add the book objects
+
+    def add_member(self, member):
+        self.members[member.member_id] = member # adding member object
+
