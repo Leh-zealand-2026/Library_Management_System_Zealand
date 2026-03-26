@@ -166,3 +166,23 @@ class Library:
     for member in self.members.values():
         member.display_info()
         print("_____" * 5)
+
+
+# Creating a main function that acts as our main menu and allows user to call the methods we made earlier.
+
+def main():
+    library = Library()
+    
+    # Our menu options
+    while True:
+        print("Main Menu")
+        print("_____" * 5)
+        print("1. Add Book")
+        print("2. Add Member")
+        print("3. Issue Book")
+        print("4. Return Book")
+        print("5. Display Books")
+        print("6. Display Members")
+        print("7. Exit")
+
+        
