@@ -185,4 +185,61 @@ def main():
         print("6. Display Members")
         print("7. Exit")
 
+        # read user input and save as variable "choice"
+        choice = input("Press the number corresponding to the action you want to perform.")
+
+        # We use if and elif statements to check if "choice" input matches our menu options
+        if choice == "1":
+            print("You have chosen 'Add Book' please enter the required information\n")
+            book_id = input("Enter book ID: ")
+            title = input("Enter title: ")
+            author = input("Enter author: ")
+            copies = int(input("Enter number of copies: "))
+
+            book = Book(book_id, title, author, copies)
+            library.add_book(book)
+
+        # elif checks if the previous statement was true, if not then it will check this one.
+        # We use the same logic for all of our menu options
+        elif choice == "2":
+            print("You have chosen 'Add member'\n")
+            member_id = input("Enter member ID: ")
+            name = input("Enter name: ")
+
+            member = Member(member_id, name)
+            library.add_member(member)
+
+        elif choice == "3":
+            print("You have chosen 'Issue Book'\n")
+            member_id = input("Enter member ID: ")
+            book_id = input("Enter book ID: ")
+
+            library.issue_book(member_id, book_id)
+
+        elif choice == "4":
+            print("You have chosen 'Return Book'\n")
+            member_id = input("Enter member ID: ")
+            book_id = input("Enter book ID: ")
+
+            library.return_book(member_id, book_id)
+
+        elif choice == "5":
+            print("You have chosen 'Display Books'\n")    
+            library.display_books()
+
+        elif choice == "6":
+            print("You have chosen 'Display Members'\n")
+            library.display_members()
+
+        elif choice == "7":
+            print("You have chosen 'Exit'\n")
+            break
         
+        # Incase someone writes something other than our menu options we can handle it with an else statement.
+        else:
+            print("Invalid input, please use number corresponding to menu options.")
+
+    # When you import python functions they are ran automatically, so to make sure we don't run code we don't intend to
+    # we can use the if __name__ == "__main__" line so that main() is only run when we cal it directly
+    if __name__ == "__main__":
+        main()
