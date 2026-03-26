@@ -57,6 +57,7 @@ class Library:
     # Our logic for issuing books
     def issue_book(self, member_id, book_id):
 
+
         # Checking for book_id match in the books list and handling exception
         if book_id not in self.books:
             print("No book matches that ID in the database")
@@ -66,6 +67,9 @@ class Library:
         if member_id not in self.members:
             print("Member does not exist.")
             return
+        
+        book = self.books[book_id]
+        member = self.members[member_id]
         
         # if book and member exist we then check if copies are available
         if book.copies > 0:
@@ -95,4 +99,67 @@ class Library:
             member.return_book(book_id)
             print(f"{book_id} was returned successfully.")
         else:
-            print(f"Book was not found in {member_id}'s borrowed list")
+            print(f"Book was not found in {member_id}'s borrowed list.")
+        
+        # check for book_id match in library and removes if found
+    def remove_book(self, book_id):
+        if book_id in self.books:
+            del self.books[book_id]
+            print(f"{book_id} removed from library.")
+        else:
+            print(f"{book_id} does not match any id in library.")
+
+        # updating book, check for book_id then overwrite with new information
+
+    def update_book(self, book_id, title=None, author=None, copies=None):
+        if book_id not in self.books:
+            print(f"{book_id} not found")
+            return
+        
+    book = self.books[book_id]
+
+    if title:
+        book.title = title
+    if author:
+        book.author = author
+    if copies is not None:
+        book.copies = copies
+    
+    print(f"{book_id} updated.")
+
+    # checks if books are in library and then uses display info for all books
+    def display_books(self):
+        if not self.books:
+            print("No books available.")
+            return
+        
+        for book in self.books.values():
+            book.display_info()
+            print("_____" * 5)
+
+    # Check for member_id match and deletes if found
+    def remove_member(self, member_id):
+        if member_id in self.members:
+            del self.members[member_id]
+            print(f"{member_id} removed from database.")
+        else:
+            print("No matching id found in database.")
+
+    # Check for member_id match and updates name if found
+    def update_member(self, member_id, name=None):
+        if member_id not in self.members:
+            print("No matching id found in database.")
+        
+        if name:
+            member.name = name
+            print("Member name updated")
+    
+    # check for members in library and then displays info for all found
+    def display_members(self):
+        if not self.members:
+            print("No members are registered in library database")
+        return
+    
+    for member in self.members.values():
+        member.display_info()
+        print("_____" * 5)
