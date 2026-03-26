@@ -94,7 +94,7 @@ class Library:
         member = self.members[member_id]
 
         # Now we check the members list of borrowed books and update their list.
-        if book_id in member.borrowed.books:
+        if book_id in member.borrowed_books:
             book.copies += 1
             member.return_book(book_id)
             print(f"{book_id} was returned successfully.")
