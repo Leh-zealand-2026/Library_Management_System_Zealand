@@ -241,5 +241,5 @@ def main():
 
     # When you import python functions they are ran automatically, so to make sure we don't run code we don't intend to
     # we can use the if __name__ == "__main__" line so that main() is only run when we cal it directly
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
