@@ -115,17 +115,17 @@ class Library:
         if book_id not in self.books:
             print(f"{book_id} not found")
             return
-        
-    book = self.books[book_id]
-
-    if title:
-        book.title = title
-    if author:
-        book.author = author
-    if copies is not None:
-        book.copies = copies
     
-    print(f"{book_id} updated.")
+        book = self.books[book_id]
+
+        if title:
+            book.title = title
+        if author:
+            book.author = author
+        if copies is not None:
+            book.copies = copies
+    
+        print(f"{book_id} updated.")
 
     # checks if books are in library and then uses display info for all books
     def display_books(self):
@@ -149,7 +149,10 @@ class Library:
     def update_member(self, member_id, name=None):
         if member_id not in self.members:
             print("No matching id found in database.")
+            return
         
+        member = self.members[member_id]
+
         if name:
             member.name = name
             print("Member name updated")
@@ -158,7 +161,7 @@ class Library:
     def display_members(self):
         if not self.members:
             print("No members are registered in library database")
-        return
+            return
     
     for member in self.members.values():
         member.display_info()
