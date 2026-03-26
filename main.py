@@ -163,9 +163,9 @@ class Library:
             print("No members are registered in library database")
             return
     
-    for member in self.members.values():
-        member.display_info()
-        print("_____" * 5)
+        for member in self.members.values():
+            member.display_info()
+            print("_____" * 5)
 
 
 # Creating a main function that acts as our main menu and allows user to call the methods we made earlier.
