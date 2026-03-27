@@ -70,9 +70,20 @@ class Library:
         self.members = {} # List of members
     
     def add_book(self, book):
+
+        # Making a check to see if book already exists
+        if book.book_id in self.books:
+            print(f"The book ID:{book.book_id} already exists in the database")
+            return
         self.books[book.book_id] = book # We add the book objects
 
     def add_member(self, member):
+
+        # Checking if member already exists
+        if member.member_id in self.member:
+            print(f"The member ID {member.member_id} already exists in the database")
+            return
+
         self.members[member.member_id] = member # adding member object
 
     # Our logic for issuing books
