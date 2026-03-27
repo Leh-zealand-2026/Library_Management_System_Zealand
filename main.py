@@ -56,13 +56,13 @@ class Member(LibraryObject):
 class Library:
 
     # An example of polymorphism, member and book classes have different information,
-    # but they share same parent class LibraryObject with display_info()
+    # but they share same parent class LibraryObject and both use display_info()
     def display_all(self):
 
         all_objects = list(self.books.values()) + list(self.members.values())
 
         for obj in all_objects:
-            obj.display_info()
+            obj.display_info() # Here we call display_info() for both member and book that are both library objects
             print("---------" * 5)
 
     def __init__(self):
