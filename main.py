@@ -4,9 +4,18 @@
 
 # 1. First we define the classes, these are blueprints that define our data structure
 
+
+
+# Polymorphism is when the same function can behave differently depending on the object
+# Both members and books want to display info. So we create parent.
+
+class LibraryObject:
+    def display_info(self):
+        pass
+
 # self allows us to establish a variable in one function and use it in another
 
-class Book:
+class Book(LibraryObject):
     def __init__(self, book_id, title, author, copies):
         self.book_id = book_id
         self.title = title
@@ -18,9 +27,10 @@ class Book:
         print(f"ID: {self.book_id}")
         print(f"Title: {self.title}")  
         print(f"Author: {self.author}")  
-        print(f"Copies: {self.copies}")   
-        
-class Member:
+        print(f"Copies: {self.copies}")
+
+
+class Member(LibraryObject):
     def __init__(self, member_id, name):
         self.member_id = member_id
         self.name = name
@@ -44,6 +54,17 @@ class Member:
 
 # The library keeps track of books and members, these are saved as objects in lists.
 class Library:
+
+    # An example of polymorphism, member and book classes have different information,
+    # but they share same parent class LibraryObject with display_info()
+    def display_all(self):
+
+        all_objects = list(self.books.values()) + list(self.members.values())
+
+        for obj in all_objects:
+            obj.display_info()
+            print("---------" * 5)
+
     def __init__(self):
         self.books = {} # List of books
         self.members = {} # List of members
@@ -175,18 +196,20 @@ def main():
     
     # Our menu options
     while True:
-        print("Main Menu")
-        print("_____" * 5)
+        print("\nMain Menu")
+        print("Library Database management system")
+        print("--------------" * 5)
         print("1. Add Book")
         print("2. Add Member")
         print("3. Issue Book")
         print("4. Return Book")
         print("5. Display Books")
         print("6. Display Members")
-        print("7. Exit")
+        print("7. Display all database contents")
+        print("8. Exit")
 
         # read user input and save as variable "choice"
-        choice = input("Press the number corresponding to the action you want to perform.")
+        choice = input("Press the number corresponding to the action you want to perform.\n")
 
         # We use if and elif statements to check if "choice" input matches our menu options
         if choice == "1":
@@ -232,13 +255,17 @@ def main():
             library.display_members()
 
         elif choice == "7":
+            print("You have chosen 'Display all'\n")
+            library.display_all()
+
+        elif choice == "8":
             print("You have chosen 'Exit'\n")
             break
-        
-        # Incase someone writes something other than our menu options we can handle it with an else statement.
         else:
             print("Invalid input, please use number corresponding to menu options.")
+        # Incase someone writes something other than our menu options we can handle it with an else statement.
 
+        
     # When you import python functions they are ran automatically, so to make sure we don't run code we don't intend to
     # we can use the if __name__ == "__main__" line so that main() is only run when we cal it directly
 if __name__ == "__main__":
