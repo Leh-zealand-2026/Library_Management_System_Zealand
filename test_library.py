@@ -31,3 +31,17 @@ def test_add_member():
 
     # Check if any member id matches who we just added
     assert "23" in lib.members
+
+def test_issue_book():
+    lib = Library()
+    book = Book("2026", "Harry Potter", "JK Rowling", 10)
+    member = Member("23", "Lebron James")
+
+    lib.add_book(book)
+    lib.add_member(member)
+
+    # Check member first then book id
+    lib.issue_book("23", "2026")
+
+    # We had 10 books, issued 1, so we expect there to be 9 books left if we issued correctly.
+    assert book.copies == 9
