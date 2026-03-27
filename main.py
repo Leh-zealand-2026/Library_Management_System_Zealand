@@ -80,7 +80,7 @@ class Library:
     def add_member(self, member):
 
         # Checking if member already exists
-        if member.member_id in self.member:
+        if member.member_id in self.members:
             print(f"The member ID {member.member_id} already exists in the database")
             return
 
