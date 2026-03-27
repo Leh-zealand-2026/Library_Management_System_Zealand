@@ -207,17 +207,19 @@ def main():
     
     # Our menu options
     while True:
-        print("\nMain Menu")
-        print("Library Database management system")
-        print("--------------" * 5)
+        print("\nLibrary Management System")
         print("1. Add Book")
-        print("2. Add Member")
-        print("3. Issue Book")
-        print("4. Return Book")
-        print("5. Display Books")
-        print("6. Display Members")
-        print("7. Display all database contents")
-        print("8. Exit")
+        print("2. Remove Book")
+        print("3. Update Book")
+        print("4. Add Member")
+        print("5. Remove Member")
+        print("6. Update Member")
+        print("7. Issue Book")
+        print("8. Return Book")
+        print("9. Display Books")
+        print("10. Display Members")
+        print("11. Display All")
+        print("12. Exit")
 
         # read user input and save as variable "choice"
         choice = input("Press the number corresponding to the action you want to perform.\n")
@@ -234,8 +236,23 @@ def main():
             library.add_book(book)
 
         # elif checks if the previous statement was true, if not then it will check this one.
-        # We use the same logic for all of our menu options
+        # We use the same elif logic for all of our menu options
         elif choice == "2":
+             print("You have chosen Remove Book.")
+             book_id = input("Enter the book ID to remove: ")
+             library.remove_book(book_id)
+        
+        elif choice == "3":
+            print("You have chosen Update Book.")
+            book_id = input("Enter the book ID to update: ")
+            title = input("Title of the book: ")
+            author = input("Author of the book: ")
+            copies_input = input("How many copies of the book?: ")
+            copies = int(copies_input) if copies_input else None
+            library.update_book(book_id, title or None, author or None, copies) # The None handles the case where the user put in no information
+
+        
+        elif choice == "4":
             print("You have chosen 'Add member'\n")
             member_id = input("Enter member ID: ")
             name = input("Enter name: ")
@@ -243,33 +260,44 @@ def main():
             member = Member(member_id, name)
             library.add_member(member)
 
-        elif choice == "3":
+        elif choice == "5":
+            print("You have chosen to remove a member.")
+            member_id = input("Enter the member ID you want to remove: ")
+            library.remove_member(member_id)
+
+        elif choice == "6":
+            print("You have chosen to update member ID: ")
+            member_id = input("Enter member ID to update: ")
+            name = input("Enter their new name: ")
+            library.update_member(member_id, name)
+        
+        elif choice == "7":
             print("You have chosen 'Issue Book'\n")
             member_id = input("Enter member ID: ")
             book_id = input("Enter book ID: ")
 
             library.issue_book(member_id, book_id)
 
-        elif choice == "4":
+        elif choice == "8":
             print("You have chosen 'Return Book'\n")
             member_id = input("Enter member ID: ")
             book_id = input("Enter book ID: ")
 
             library.return_book(member_id, book_id)
 
-        elif choice == "5":
+        elif choice == "9":
             print("You have chosen 'Display Books'\n")    
             library.display_books()
 
-        elif choice == "6":
+        elif choice == "10":
             print("You have chosen 'Display Members'\n")
             library.display_members()
 
-        elif choice == "7":
+        elif choice == "11":
             print("You have chosen 'Display all'\n")
             library.display_all()
 
-        elif choice == "8":
+        elif choice == "12":
             print("You have chosen 'Exit'\n")
             break
         else:
