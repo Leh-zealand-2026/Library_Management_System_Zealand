@@ -58,3 +58,42 @@ def test_return_book():
     lib.return_book("23", "2026")
 
     assert book.copies == 1
+
+def test_remove_member():
+    lib = Library()
+    member = Member("23", "Lebron James")
+    lib.add_member(member)
+    lib.remove_member("23")
+    assert "23" not in lib.members
+
+# Adding some edge cases
+
+    # We try adding 0 copies of book to library database, we then assert if
+    # A. There are no copies and B. The member did not borrow copy that did not exist.
+def test_issue_book_no_copy():
+    lib = Library()
+    book = Book("2026", "Harry Potter", "JK Rowling", 0)
+    member = Member("23", "Lebron James")
+    lib.add_book(book)
+    lib.add_member(member)
+
+    lib.issue_book("23", "2026")
+
+    assert book.copies == 0
+    assert member.borrowed_books == []
+
+ # What happens if a member returns a book they didn't lend?
+ # Assert that number of copies available did not change
+ # Assert that member does not have a copy in his file. (Or negative or some other unusual behavious, it should be empty.)
+def test_return_book_not_borrowed():
+    lib = Library()
+    book = Book("2026", "Harry Potter", "JK Rowling", 1)
+    member = Member("23", "Lebron James")
+    lib.add_book(book)
+    lib.add_member(member)
+
+    lib.return_book("23", "2026")
+
+    assert book.copies == 1
+    assert member.borrowed_books == []
+
