@@ -45,3 +45,16 @@ def test_issue_book():
 
     # We had 10 books, issued 1, so we expect there to be 9 books left if we issued correctly.
     assert book.copies == 9
+
+def test_return_book():
+    lib = Library()
+    book = Book("2026", "Harry Potter", "JK Rowling", 1)
+    member = Member("23", "Lebron James")
+
+    lib.add_book(book)
+    lib.add_member(member)
+
+    lib.issue_book("23", "2026")
+    lib.return_book("23", "2026")
+
+    assert book.copies == 1
